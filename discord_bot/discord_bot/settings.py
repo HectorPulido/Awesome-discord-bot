@@ -126,4 +126,4 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DISCORD_KEY = "ODMyNzc5NzY0NjI4NTg2NTM2.YHowmA.Y_z32plVPUXCfVKVpW8zppdXudc"
+DISCORD_KEY = ""
