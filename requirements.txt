@@ -1,3 +1,0 @@
-django
-discord
-django-extensions==3.1.1
