@@ -38,7 +38,10 @@ class BotClient(discord.Client):
                     message["channel"]
                 )
             channel = channels_cache[message["channel"]]
-            await channel.send(message["channel"])
+            try:
+                await channel.send(message["message"])
+            except:
+                continue
 
     async def _get_history(self):
         self.message_history = []
@@ -69,3 +72,22 @@ class BotClient(discord.Client):
                 await message.add_reaction(reaction)
             except:
                 continue
+
+    @classmethod
+    def get_history_method(cls, key):
+        bot = cls()
+        bot.get_history(250)
+        bot.run(key)
+        return bot.message_history
+
+    @classmethod
+    def add_reaction_method(cls, key, messages):
+        bot = cls()
+        bot.add_reaction(messages)
+        bot.run(key)
+
+    @classmethod
+    def send_messages_method(cls, key, messages):
+        bot = cls()
+        bot.send_messages(messages)
+        bot.run(key)
