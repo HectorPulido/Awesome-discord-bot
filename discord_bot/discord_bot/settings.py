@@ -138,6 +138,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DISCORD_KEY = os.environ.get(
-    "DISCORD_TOKEN", "ODMyNzc5NzY0NjI4NTg2NTM2.YHowmA.gEpTndXyVe91uM6TUuqW52eQfbI"
-)
+DISCORD_KEY = os.environ.get("DISCORD_TOKEN")

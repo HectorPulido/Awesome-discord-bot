@@ -45,11 +45,24 @@ class BotClient(discord.Client):
 
     async def _get_history(self):
         self.message_history = []
+        self.members = {}
         channels = self.get_all_channels()
         for channel in channels:
             try:
                 async for message in channel.history(limit=self.limit):
+                    if message.author.id == self.user.id:
+                        continue
+
                     self.message_history.append(message)
+
+                    member_key = f"{message.author.id}{message.guild.id}"
+                    if not member_key in self.members:
+                        try:
+                            self.members[member_key] = await message.guild.fetch_member(
+                                message.author.id
+                            )
+                        except:
+                            continue
             except:
                 continue
 
@@ -76,9 +89,9 @@ class BotClient(discord.Client):
     @classmethod
     def get_history_method(cls, key):
         bot = cls()
-        bot.get_history(250)
+        bot.get_history(10)
         bot.run(key)
-        return bot.message_history
+        return bot.message_history, bot.members
 
     @classmethod
     def add_reaction_method(cls, key, messages):
